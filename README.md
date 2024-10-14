@@ -16,23 +16,19 @@
         <li>EJS (Embedded JavaScript templating)</li>
         <li>Leaflet.js (for interactive maps)</li>
     </ul>
-
     <h2>Back-end:</h2>
     <ul>
         <li>Node.js</li>
         <li>Express.js</li>
     </ul>
-
     <h2>Database:</h2>
     <ul>
         <li>MongoDB (with Mongoose ODM)</li>
     </ul>
-
     <h2>Authentication:</h2>
     <ul>
         <li>Passport.js (for user authentication)</li>
     </ul>
-
     <h1>Features</h1>
     <ul>
         <li>User authentication and authorization using Passport.js</li>
@@ -41,7 +37,6 @@
         <li>Display user-generated listings on a map using Leaflet.js</li>
         <li>Automatically generates maps based on location</li>
     </ul>
-
     <h1>Installation</h1>
     <ol>
         <li>Clone the repository:
@@ -60,11 +55,9 @@ SESSION_SECRET=your_secret
             <pre><code>npm start</code></pre>
         </li>
     </ol>
-
     <h1>Usage</h1>
     <p>Visit <a href="http://localhost:3000">http://localhost:3000</a> to access the application.</p>
     <p>Sign up or log in to create and manage listings.</p>
-
     <h1>Dependencies</h1>
     <p>Here’s a list of the main dependencies used in the project:</p>
     <ul>
@@ -77,10 +70,8 @@ SESSION_SECRET=your_secret
         <li>Express-session: <code>^1.x.x</code> - Session middleware for Express</li>
     </ul>
     <p>Make sure to run <code>npm install</code> to install all the required dependencies listed in <code>package.json</code>.</p>
-
     <h1>Contributing</h1>
     <p>Feel free to contribute by submitting pull requests, reporting issues, or suggesting improvements!</p>
-
     <h1>License</h1>
     <p>This project is licensed under the MIT License - see the <a href="#">LICENSE</a> file for details.</p>
 </body>
