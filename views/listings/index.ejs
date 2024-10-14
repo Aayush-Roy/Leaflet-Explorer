@@ -1,0 +1,67 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<body>
+  <div class="container my-2">
+    <div id="filters" class="container">
+      <div class="row text-center mb-3">
+          <!-- Icons Filter Row -->
+          <div class="col filter">
+              <i class="fa-solid fa-fire"></i>
+              <p>Trending</p>
+          </div>
+          <div class="col filter">
+              <i class="fa-solid fa-mountain"></i>
+              <p>Mountains</p>
+          </div>
+          <div class="col filter">
+              <i class="fa-solid fa-tree"></i>
+              <p>Countryside</p>
+          </div>
+          <div class="col filter">
+              <i class="fa-solid fa-utensils"></i>
+              <p>Restaurant</p>
+          </div>
+          <div class="col filter">
+              <i class="fa-solid fa-water"></i>
+              <p>Beach</p>
+          </div>
+          <div class="col filter">
+              <i class="fa-solid fa-tree-city"></i>
+              <p>Forest</p>
+          </div>
+          <div class="col filter">
+              <i class="fa-solid fa-house"></i>
+              <p>Cabins</p>
+          </div>
+          
+
+          <div class="col filter">
+              <i class="fa-solid fa-hotel"></i>
+              <p>Hotels</p>
+          </div>
+         
+
+      </div>
+      
+    </div>
+  
+    <div class="row justify-content-center">
+      <% for(let list of allListing) { %>
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-4 d-flex justify-content-center">
+              <a href="/listings/<%= list._id %>" style="width: 100%; text-decoration: none;">
+                  <div class="card border-0 shadow-sm" style="width: 100%; border-radius: 10px; overflow: hidden;">
+                      <img src="<%= list.image.url %>" class="card-img-top" alt="Hotel Image" style="object-fit: cover; height: 250px;">
+                      <div class="card-body p-3">
+                          <h5 class="card-title" style="font-size: 1.25rem; font-weight: 600;"><%= list.title %></h5>
+                          <p class="card-text" style="color: #6c757d;">&#8377;<%= list.price ? list.price.toLocaleString("en-In") : "Price not available" %>/night</p>
+                          <p class="tax-display" style="display: none; color: #6c757d;">Tax: <strong>18% / GST</strong></p>
+                      </div>
+                  </div>
+              </a>
+          </div>
+      <% } %>
+  </div>
+  
+
+
+  </div>
+</body>

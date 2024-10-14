@@ -1,0 +1,67 @@
+<style>
+
+  .logo {
+  
+    width: 100%;  /* Full width of the parent */
+    max-width: 80px; /* Max width constraint */
+  }
+  
+  @media (max-width: 576px) {
+    .logo {
+      max-width:64px; /* Resize for smaller screens */
+    }
+  }
+</style>
+
+<nav style="background-color: #fff; font-weight:600;" class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm sticky-top">
+  <div class="container-fluid">
+    <!-- Logo -->
+   
+    <a class="navbar-brand d-flex align-items-center" href="/listings" style="width:80px; margin-left:0;">
+      
+        <img class="img-fluid logo" src="../../logo.png" alt="Logo">
+       
+      
+    </a>
+   
+    <!-- Mobile Toggle Button for Navbar -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- Navbar content (collapsible on small screens) -->
+    <div  class="collapse navbar-collapse" id="navbarNavDropdown">
+      
+
+      <ul style="background-color: #fff; width: 100% !;" class="navbar-nav ms-auto">
+        <!-- New Listing link -->
+        <li class="nav-item">
+          <a class="nav-link" role="button" href="/listings/new">
+            <i class="bi bi-plus-circle"></i> New Listing
+          </a>
+        </li>
+
+        <!-- Dropdown for Sign Up / Login / Logout -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle"></i> Account
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <% if (currUser) { %> <!-- Check if the user is logged in -->
+              <li>
+                <a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+              </li>
+            <% } else { %>
+              <li>
+                <a class="dropdown-item" href="/signup"><i class="bi bi-person-plus"></i> Sign up</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/login"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+              </li>
+            <% } %>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

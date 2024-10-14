@@ -1,0 +1,57 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<body>
+  <div class="container my-5">
+    <h3 class="my-3">Update your Listing</h3>
+    <form action="/listings/<%=listing._id%>?_method=PUT" method="POST" class="needs-validation p-4 border rounded shadow" novalidate enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input name="listing[title]" type="text" class="form-control" id="title" value="<%=listing.title%>" required>
+        <div class="valid-feedback">Title looks good!</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="listing[description]" class="form-control" id="description" rows="4" required><%=listing.description%></textarea>
+        <div class="invalid-feedback">Please enter a short description</div>
+      </div>
+
+      
+      <div class="mb-3">
+        <label for="image" class="form-label">Original Image</label>
+        <br>
+        <img  style="width:250px; height:150px;" src="<%=originalImageUrl%>" alt="Original Image" class="img-fluid">
+      </div>
+      
+
+      <div class="mb-3" >
+        <label for="image" class="form-label">Upload New Image</label>
+        <input type="file" name="listing[image]" class="form-control" id="image" value="<%=listing.image.url%>" >
+       
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" name="listing[price]" class="form-control" id="price" value="<%=listing.price%>" required>
+        <div class="invalid-feedback">Price Should be Valid!</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" name="listing[location]" class="form-control" id="location" value="<%=listing.location%>" required>
+        <div class="invalid-feedback">Location should be Valid</div>
+      </div>
+
+
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" name="listing[country]" class="form-control" id="country" value="<%=listing.country%>" required>
+        <div class="invalid-feedback">Country name should be Valid</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Update Listing</button>
+    </form>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+

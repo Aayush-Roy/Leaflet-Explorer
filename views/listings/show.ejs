@@ -1,0 +1,128 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<body>
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <!-- Card for the Listing -->
+        <div class="card rounded-0" style="border: none;">
+          <!-- Display Image -->
+          <img src="<%= listing.image.url %>" class="card-img-top" alt="<%= listing.title %>" style="object-fit: cover; height: 400px;">
+          <div class="card-body">
+            <p style="font-weight: bold; color: #343a40;">Owned by <%= listing.owner.username %></p>
+            <h3 class="card-title text-center" style="font-weight: bold; color: #343a40;"><%= listing.title %></h3>
+            <p class="card-text" style="color: #6c757d;"><%= listing.description %></p>
+            <p class="fw-bold text-center" style="font-size: 1.5rem; color: #28a745;">&#8377;<%= listing.price.toLocaleString("en-In") %></p>
+            <p class="text-center" style="color: #6c757d;"><%= listing.location %>, <%= listing.country %></p>
+            
+            <!-- Edit Button -->
+            <% if (currUser && currUser._id.equals(listing.owner._id)) { %>
+              <a href="/listings/<%= listing._id %>/edit" class="btn btn-primary w-100 mb-2" style="border-radius: 0;">Edit</a>
+              <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-danger w-100" style="border-radius: 0;">Delete</button>
+              </form>
+            <% } %>
+          </div>
+        </div>
+
+        <!-- Review Section -->
+        <% if (currUser) { %>
+        <div class="card rounded-0 mt-4">
+          <div class="card-body">
+            <h5 class="card-title text-center" style="font-weight: bold; color: #343a40;">Leave a Review</h5>
+            <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
+              <div class="mb-3">
+                <label for="comment" class="form-label" style="color: #6c757d;">Comment</label>
+                <textarea name="review[comment]" id="comment" rows="4" class="form-control" style="border-radius: 0;" required></textarea>
+              </div>
+              <fieldset class="my-3 starability-slot">
+                <p style="font-size:18px;">Rating:</p>
+                <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+                <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                <label for="first-rate1" title="Terrible">1 star</label>
+                <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                <label for="first-rate2" title="Not good">2 stars</label>
+                <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                <label for="first-rate3" title="Average">3 stars</label>
+                <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                <label for="first-rate4" title="Very good">4 stars</label>
+                <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                <label for="first-rate5" title="Amazing">5 stars</label>
+              </fieldset>
+              <button type="submit" class="btn btn-success w-100" style="border-radius: 0;">Submit Review</button>
+            </form>
+          </div>
+        </div>
+        <% } %>
+
+        <!-- Display Existing Reviews -->
+        <div class="card rounded-0 mt-4">
+          <div class="card-body">
+            <h5 class="card-title text-center" style="font-weight: bold; color: #343a40;">Reviews</h5>
+            <% if (listing.reviews.length > 0) { %>
+              <% listing.reviews.forEach(review => { %>
+                <div class="border border-2 px-4 py-4 review mb-3">
+                  <p style="color: #6c757d;font-weight:600;">@<%= review.author.username %></p>
+                  <p class="starability-result" data-rating="<%= review.rating %>">Rated: <%= review.rating %> stars</p>
+                  <p class="fw-bold" style="color: #4b5259;"><%= review.comment %></p>
+                  <p class="fw-bold" style="color: #28a745;">Rating: <%= review.rating %>/5</p>
+                  <% if (currUser && currUser._id.equals(review.author._id)) { %>
+                    <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                      <button type="submit" class="btn btn-dark btn-sm" style="border-radius: 0;">Delete Review</button>
+                    </form>
+                  <% } %>
+                </div>
+              <% }) %>
+            <% } else { %>
+              <p class="text-center" style="color: #6c757d;">No reviews yet. Be the first to review!</p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Map Container -->
+     <h2 class="mt-5">Where you'll be</h2>
+    <div id="map" class="mt-3" style="height: 400px; width: 100%;"></div>
+
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        const address = "<%= listing.location %>"; // Assuming listing.location contains the address
+
+        // Function to fetch geocode and display the map
+        function loadMap() {
+            fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address)}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        const { lat, lon } = data[0];
+                        initializeMap(lat, lon);
+                    } else {
+                        console.error('No results found for the specified address.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        // Function to initialize the map
+        function initializeMap(lat, lon) {
+            const map = L.map('map').setView([lat, lon], 13); // Set initial view
+
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            // Add a marker at the geocoded location
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup(`<b>${address}</b>`)
+                .openPopup();
+        }
+
+        // Load the map on page load
+        window.onload = loadMap;
+    </script>
+</body>
+</html>

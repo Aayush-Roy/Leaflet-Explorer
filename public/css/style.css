@@ -1,0 +1,143 @@
+.navbar{
+    height:5rem;
+    background-color: white;
+}
+.fa-hotel{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link{
+    color: #222222 !important;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+  }
+
+.footer{
+    width: 100% !important;;
+    position: relative !important;
+    bottom: 0 !important;
+}
+  
+#filters {
+    margin-top:10px;
+    padding:10px; /* Light background color */
+    border-radius: 5px; /* Rounded corners */
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+}
+
+.filter i {
+    font-size: 1.5rem; /* Larger icon size */
+    color: #495057; /* Darker color for icons */
+    margin-bottom: 5px;
+}
+
+.filter i:hover{
+    color: black;
+    transition:0.5s;
+    cursor: pointer;
+}
+
+.filter p {
+    margin: 0;
+    font-size: 1rem; /* Font size for text */
+    color: #333;
+}
+
+/* Flexbox styling for single row layout */
+.row {
+    display: flex;
+    justify-content: center; /* Center the icons */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+/* Checked State */
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Text label for toggle */
+#toggleLabel {
+    margin-left: 10px; /* Space between toggle and label */
+    font-size: 1rem; /* Font size for the label */
+    color: #333;
+}
+
+.card {
+    transition: transform 0.2s; /* Smooth hover effect */
+}
+
+.card:hover {
+    transform: scale(1.02); /* Slightly enlarge the card on hover */
+}
+
+.card-img-top {
+    transition: opacity 0.2s; /* Smooth image transition */
+}
+
+.card-img-top:hover {
+    opacity: 0.8; /* Slightly fade the image on hover */
+}
+
+
+@media (max-width: 768px) {
+    .filter {
+        padding: 15px;
+    }
+
+    .filter p {
+        font-size: 0.9rem; /* Smaller font on mobile */
+    }
+}

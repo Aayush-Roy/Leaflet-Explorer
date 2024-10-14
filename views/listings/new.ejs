@@ -1,0 +1,47 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<body>
+  <div class="container my-5">
+    <h3 class="">Create New Listing</h3>
+    <form action="/listings" method="POST" class="p-4 border rounded shadow needs-validation" novalidate enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input name="listing[title]" type="text" class="form-control" id="title" placeholder="Enter title" required>
+        <div class="valid-feedback">Title looks good!</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="listing[description]" class="form-control" id="description" rows="4" placeholder="Enter description" required></textarea>
+        <div class="invalid-feedback">Please enter a short description</div>
+      </div>
+
+     
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image</label>
+        <input type="file" name="listing[image]" class="form-control" id="image" placeholder="Enter image/URL" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input type="number" name="listing[price]" class="form-control" id="price" placeholder="Enter price" required>
+        <div class="invalid-feedback">Please enter a valid price!</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" name="listing[location]" class="form-control" id="location" placeholder="Location" required>
+        <div class="invalid-feedback">Please enter the location</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" name="listing[country]" class="form-control" id="country" required>
+        <div class="invalid-feedback">Please enter the country name!</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">Create Listing</button>
+    </form>
+  </div>
+</body>
+</html>
